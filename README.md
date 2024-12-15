@@ -4,10 +4,10 @@
 
 ​Here is an example of what you can expect to build: https://www.webchat.so/
 
-Completed the following TODOs and changed them to DONEs:
+Completed the following:
 
 - src/app/page.tsx: Update the UI and handle the API response as needed
-- src/app/api/chat/route.ts: Implement the chat API with Groq and web scraping with Cheerio and Puppeteer
+- src/app/api/chat/route.ts: Implement the chat API with Groq and web scraping with Cheerio
 - src/middleware.ts: Implement the code here to add rate limiting with Redis
 
 Project Requirements:
@@ -35,6 +35,7 @@ TODOs: ***(When making changes create a new *'todo/task-name'* branch)***
 - [How to use Redis Caching](https://www.youtube.com/watch?v=-5RTyEim384)
 - [Nextjs Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware)
 - [Write a Regular Expression for a URL](https://www.freecodecamp.org/news/how-to-write-a-regular-expression-for-a-url/)
+- [Web Scrape Example](https://x.com/hassantsyed/status/1681020613157060610)
 - Web Scraping Packages/Web Scraping Tools:
   - [Selenium](https://www.selenium.dev/documentation/webdriver/getting_started/install_library/)
   - [Beautiful Soup](https://pypi.org/project/beautifulsoup4/)
