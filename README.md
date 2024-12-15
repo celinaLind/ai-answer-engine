@@ -18,7 +18,7 @@ A chat interface where a user can:
 - Ask a question and get an answer with sources cited
 - Share their conversation with others, and let them continue with their conversation
 
-TODOs:
+TODOs: ***(When making changes create a new *'todo/task-name'* branch)***
 
 1. Fix prompt for groq response to: use context provided at any point by user or search google when no user provided context.
 2. Add share conversation feature, can look at message helper file for beginning code
