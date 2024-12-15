@@ -1,6 +1,20 @@
 import axios from "axios"; // axios sends requests to the browser
 import * as cheerio from "cheerio"; // cheerio is a jQuery-like library for Node.js used for web scraping
-import { error } from "console";
+import { cacheScrapedContent, getCachedContent } from "./cached"; // import the cacheScrapedContent function from the cached.ts file
+
+// Define the ScrapedContent interface
+export interface ScrapedContent {
+  url: string;
+  title: string;
+  headings: {
+    h1: string;
+    h2: string;
+  };
+  metaDescription: string;
+  content: string;
+  error: string | null;
+  cachedAt?: number;
+}
 
 // Regular expression to match URLs
 export const urlRegex = /https?:\/\/[^\s]+/g;
@@ -14,6 +28,15 @@ export function cleanText(text: string) {
 export async function getScraped(url: string) {
   console.log(`Get content for URL: ${url}`);
   try {
+    // Confirm if cached content exists for url
+    console.info(`Checking cache for URL: ${url}`);
+    const cached = await getCachedContent(url);
+    if (cached) {
+      console.info(`Cache hit for URL: ${url}`);
+      return cached;
+    }
+    console.info(`Cache miss - proceeding with fresh scrape of: ${url}`);
+
     // Step 1: Get content of URL
     const response = await axios.get(url);
     // Step 2: Load the HTML into cheerio
@@ -84,7 +107,7 @@ export async function getScraped(url: string) {
     const cleanedContent = cleanText(combineContent).slice(0, 10000);
 
     // Return extracted and cleaned content
-    return {
+    const finalResponse = <ScrapedContent>{
       url,
       title: cleanText(title),
       headings: {
@@ -95,6 +118,7 @@ export async function getScraped(url: string) {
       content: cleanedContent,
       error: null,
     };
+    await cacheScrapedContent(url, finalResponse);
   } catch (error) {
     console.error("Error while scrapping the website:", error);
     return null;
