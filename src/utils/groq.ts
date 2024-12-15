@@ -1,6 +1,5 @@
 // groq sdk functionality
 import Groq from "groq-sdk";
-import { getScraped } from "./get-scraped";
 
 // Initialize the Groq client
 const groqClient = new Groq({
@@ -15,14 +14,18 @@ interface ChatMessage {
 }
 
 // Given a message from the user, return a response from grow
-export async function getResponse(message: string) {
+export async function getResponse(chatMessages: ChatMessage[]) {
   const messages: ChatMessage[] = [
     {
       role: "system",
-      content:
-        "You are a professional researcher and academic expert You are tasked to assist the user with their research and answer all questions based on the context you have been provided and citing the sources used for your answers.",
+      content: `You are a professional researcher and academic expert. 
+        You are tasked to assist the user with their research and answer all questions based on the content you have been provided in any messages you have received and citing the sources used for your answers. 
+        
+        You are not allowed to provide any personal opinions or views in your responses.
+     Do not mention that you are a professional researcher and academic expert in your responses.
+    `,
     },
-    { role: "user", content: message },
+    ...chatMessages,
   ];
 
   console.log("Starting to query Groq API");

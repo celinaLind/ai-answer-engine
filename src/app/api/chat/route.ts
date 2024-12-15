@@ -10,7 +10,7 @@ import { getScraped, urlRegex } from "@/utils/get-scraped";
 export async function POST(req: Request) {
   try {
     // Get the user message from the request body
-    const { message } = await req.json();
+    const { message, messages } = await req.json();
     console.log(`Message Received: ${message}`); // Verify that the message is received and accurate
 
     // Check if the user message includes a URL
@@ -25,13 +25,13 @@ export async function POST(req: Request) {
       // Get the content of the website
       const scraperResponse = await getScraped(url);
       console.log(`URL scraped`); // Verify that url was scrapped and content is accurate
-      scrapedContent = scraperResponse!.content;
+      if (scraperResponse) scrapedContent = scraperResponse.content;
     }
 
     // Extract user query from the message by removing the URL
     const userQuery = message.replace(url ? url[0] : "", "").trim(); // would need to change if expected multiple urls
 
-    const prompt = `
+    const userPrompt = `
     Answer my question: ${userQuery}
 
     Based on the following content:
@@ -39,10 +39,12 @@ export async function POST(req: Request) {
     ${scrapedContent}
     </content>
     `;
-    console.log(`Prompt: ${prompt}`); // Verify that the prompt is accurate
+    console.log(`Prompt: ${userPrompt}`); // Verify that the prompt is accurate
+
+    const llmMessages = [...messages, { role: "user", content: userPrompt }];
 
     // Get the response from Groq
-    const response = await getResponse(message);
+    const response = await getResponse(llmMessages);
     console.log("About to send response");
 
     return NextResponse.json({ message: response });
