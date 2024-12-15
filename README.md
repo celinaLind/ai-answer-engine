@@ -35,6 +35,10 @@ TODOs:
 - [How to use Redis Caching](https://www.youtube.com/watch?v=-5RTyEim384)
 - [Nextjs Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware)
 - [Write a Regular Expression for a URL](https://www.freecodecamp.org/news/how-to-write-a-regular-expression-for-a-url/)
+- Web Scraping Packages/Web Scraping Tools:
+  - [Selenium](https://www.selenium.dev/documentation/webdriver/getting_started/install_library/)
+  - [Beautiful Soup](https://pypi.org/project/beautifulsoup4/)
+  - [Puppeteer](https://pptr.dev/) - browser automation
 
 ## Skills
 
