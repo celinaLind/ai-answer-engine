@@ -20,7 +20,7 @@ A chat interface where a user can:
 
 TODOs: ***(When making changes create a new *'todo/task-name'* branch)***
 
-1. Fix prompt for groq response to: use context provided at any point by user or search google when no user provided context.
+1. Fix prompt for groq response to: use context provided at any point by user or search google when no user provided context. [Server sent events](https://upstash.com/blog/sse-streaming-llm-responses)
 2. Add share conversation feature, can look at message helper file for beginning code
 3. Incorporate Puppeteer
 
