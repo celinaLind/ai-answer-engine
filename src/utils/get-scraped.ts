@@ -119,6 +119,7 @@ export async function getScraped(url: string) {
       error: null,
     };
     await cacheScrapedContent(url, finalResponse);
+    return finalResponse;
   } catch (error) {
     console.error("Error while scrapping the website:", error);
     return null;

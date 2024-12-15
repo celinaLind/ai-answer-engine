@@ -11,11 +11,17 @@ const MAX_CACHE_SIZE = 1024000; // Maximum storage available to cache (1MB limit
 
 // Function to get cache key
 function getCacheKey(url: string): string {
-  const sanitizedUrl = url.substring(0, 200); //limit the length of the URL/key length
-  return `scrape:${sanitizedUrl}`;
+  // Receiving a TypeError: url.substring is not a function
+  // const sanitizedUrl = url.substring(0, 100); //limit the length of the URL/key length
+  // return `scrape:${sanitizedUrl}`;
+  return url;
 }
 
 // Function to validate ScrapedContent
+/* 
+Need to set up testing for this function b/c I am receiving
+Invalid content to cache: [ 'https://blog.google/technology/developers/google-gemma-2/' ]
+*/
 function isValidScrapedContent(content: any): content is ScrapedContent {
   return (
     typeof content === "object" &&
