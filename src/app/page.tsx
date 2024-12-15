@@ -28,22 +28,26 @@ export default function Home() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // Do not include the API key in the client-side code
+          // "Authorization": `Bearer ...`, //this would be visible to the client in the Network tab
+          // Instead you can use Next.js 'server-actions'
+          // this will run code server-side and not expose the API key to the client
         },
         body: JSON.stringify({ message }),
       });
 
-      // TODO: Handle the response from the chat API to display the AI response in the UI
+      // DONE: Handle the response from the chat API to display the AI response in the UI
 
-
-
-
+      const data = await response.json();
+      console.log(`data received:`, data);
+      const aiMessage: Message = { role: "ai", content: data.message };
+      setMessages(prev => [...prev, aiMessage]); // ...prev is the previous state of messages
     } catch (error) {
       console.error("Error:", error);
     } finally {
       setIsLoading(false);
     }
   };
-
 
   // TODO: Modify the color schemes, fonts, and UI as needed for a good user experience
   // Refer to the Tailwind CSS docs here: https://tailwindcss.com/docs/customizing-colors, and here: https://tailwindcss.com/docs/hover-focus-and-other-states
